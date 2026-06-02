@@ -1,5 +1,16 @@
-<div class="w-screen h-screen flex flex-col items-center place-content-center">
-    <h1 class="text-white text-center font-bold text-3xl">Login Page!</h1>
-    <a class="text-blue-500 hover:text-blue-400 hover:underline cursor-pointer transition-all duration-200 text-center font-bold text-xl m-4" href="/dashboard">Dashboard?</a>
-    <a class="text-blue-500 hover:text-blue-400 hover:underline cursor-pointer transition-all duration-200 text-center font-bold text-xl m-4" href="/">Back?</a>
+<script>
+  import Copyright from "../Copyright.svelte";
+  import LoginForm from "./LoginForm.svelte";
+  import LoginSidebar from "./LoginSidebar.svelte";
+
+</script>
+<svelte:head>
+    <title>Login Page!</title>
+</svelte:head>
+
+<div class="w-screen h-screen flex">
+    <LoginForm />
+    <!-- <LoginSidebar /> -->
+
+    <Copyright />
 </div>
