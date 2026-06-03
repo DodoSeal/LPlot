@@ -20,11 +20,8 @@ jobs:
                 node-version: 'lts/*'
                 cache: 'npm'
 
-            - name: "Debug"
-              run: echo "Hello, World!"
-
-            # - name: "Stop PM2"
-            #   run: "pm2 stop \"LPlot-Website\""
+            - name: "Stop PM2"
+              run: "pm2 stop \"LPlot-Website\""
 
             - name: "Update Packages"
               run: npm install
@@ -35,5 +32,8 @@ jobs:
             - name: "Run Project"
               run: node build
 
-            # - name: "Start PM2"
-            #   run: "pm2 start \"LPlot-Website\""
+            - name: "Start PM2"
+              run: "pm2 start \"LPlot-Website\""
+
+            - name: "Save PM2"
+              run: pm2 save
