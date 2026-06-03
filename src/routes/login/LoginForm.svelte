@@ -35,14 +35,14 @@
 
 <div class="w-full md:w-[50%] h-full flex flex-col items-center place-content-center">
     <!-- Login Title -->
-    <div class="w-130 h-24 flex items-center place-content-center mb-6">
+    <div class="w-full h-24 flex items-center place-content-center mb-6">
         <p class="text-3xl text-black font-bold">LPlot Login</p>
     </div>
 
     <div id="error-box"></div>
     
     <!-- Input Fields -->
-    <div class="w-130 h-75 flex flex-col items-center place-content-center">
+    <div class="w-full h-75 flex flex-col items-center place-content-center">
         <p class="w-[18rem] font-light text-neutral-500">Email</p>
         <input class="transition-all duration-200" placeholder="name@example.com" type="email" name="email" id="email-input">
         <p class="w-[18rem] font-light text-neutral-500">Password</p>
@@ -55,7 +55,7 @@
     <div class="bg-neutral-500 opacity-60 w-50 h-px"></div>
 
     <!-- External OAuth -->
-    <div class="w-130 h-45 flex flex-col items-center place-content-center">
+    <div class="w-full h-45 flex flex-col items-center place-content-center">
         <OAuthProvider providerName="Discord" />
         <OAuthProvider providerName="GitHub" />
     </div>

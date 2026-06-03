@@ -43,7 +43,7 @@
     <div id="error-box"></div>
     
     <!-- Input Fields -->
-    <div class="w-130 h-100 flex flex-col items-center place-content-center">
+    <div class="w-full h-100 flex flex-col items-center place-content-center">
         <p class="w-[18rem] font-light text-neutral-500">Email</p>
         <input class="transition-all duration-200" placeholder="name@example.com" type="email" name="email" id="email-input">
         <p class="w-[18rem] font-light text-neutral-500">Password</p>
@@ -58,7 +58,7 @@
     <div class="bg-neutral-500 opacity-60 w-50 h-px"></div>
 
     <!-- External OAuth -->
-    <div class="w-130 h-45 flex flex-col items-center place-content-center">
+    <div class="w-full h-45 flex flex-col items-center place-content-center">
         <OAuthProvider providerName="Discord" />
         <OAuthProvider providerName="GitHub" />
     </div>
