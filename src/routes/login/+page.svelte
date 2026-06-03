@@ -10,7 +10,7 @@
 
 <div class="w-screen h-screen flex">
     <LoginForm />
-    <!-- <LoginSidebar /> -->
+    <LoginSidebar />
 
     <Copyright />
 </div>
