@@ -1,12 +1,44 @@
-<script>
-  import OAuthProvider from "./OAuthProvider.svelte";
+<script lang="ts">
+    import ErrorAlert from "../components/ErrorAlert.svelte";
+    import OAuthProvider from "./OAuthProvider.svelte";
+    import { mount, onMount } from "svelte";
 
+    onMount(() => {
+        const loginButton = document.getElementById("login-button")! as HTMLInputElement;
+        const emailInput = document.getElementById("email-input")! as HTMLInputElement;
+        const passwordInput = document.getElementById("password-input")! as HTMLInputElement;
+
+        loginButton.addEventListener("click", () =>{
+            RemoveExistingErrors();
+
+            // TODO: Make login system!
+
+            if (emailInput.value === "" || passwordInput.value === "") {
+                ShowError("Invalid Credentials!");
+            };
+        });
+    });
+
+    function RemoveExistingErrors(): void {
+        const errorBox = document.querySelector("#error-box")!;
+        errorBox.innerHTML = "";
+    };
+
+    function ShowError(message: string): void {
+        RemoveExistingErrors();
+
+        const errorBox = document.querySelector("#error-box")!;
+        mount(ErrorAlert, { target: errorBox, props: { message } });
+    };
 </script>
+
 <div class="w-[50%] h-full flex flex-col items-center place-content-center">
     <!-- Login Title -->
     <div class="w-130 h-24 flex items-center place-content-center mb-6">
         <p class="text-3xl text-black font-bold">Login Page</p>
     </div>
+
+    <div id="error-box"></div>
     
     <!-- Input Fields -->
     <div class="w-130 h-65 flex flex-col items-center place-content-center">
@@ -14,7 +46,7 @@
         <input class="transition-all duration-200" placeholder="name@example.com" type="email" name="email" id="email-input">
         <p class="w-[18rem] font-light text-neutral-500">Password</p>
         <input class="transition-all duration-200" placeholder="••••••••••••••••" type="password" name="password" id="password-input">
-        <input class="bg-blue-500 hover:bg-blue-400 transition-all duration-200 text-white" type="button" value="Login">
+        <input class="bg-blue-500 hover:bg-blue-400 transition-all duration-200 text-white" type="button" value="Login" id="login-button">
     </div>
 
     <div class="bg-neutral-500 opacity-60 w-50 h-px"></div>

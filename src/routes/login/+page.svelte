@@ -1,11 +1,11 @@
 <script>
-  import Copyright from "../Copyright.svelte";
+  import Copyright from "../components/Copyright.svelte";
   import LoginForm from "./LoginForm.svelte";
   import LoginSidebar from "./LoginSidebar.svelte";
 
 </script>
 <svelte:head>
-    <title>Login Page!</title>
+    <title>Login - LPlot</title>
 </svelte:head>
 
 <div class="w-screen h-screen flex">
