@@ -1,10 +1,10 @@
 <script lang="ts">
     import Copyright from "../components/Copyright.svelte";
     import ErrorAlert from "../components/ErrorAlert.svelte";
-    import OAuthProvider from "./OAuthProvider.svelte";
+    import OAuthProvider from "../components/OAuthProvider.svelte";
     import { mount, onMount } from "svelte";
     import { getAuth, sendEmailVerification, signInWithEmailAndPassword, type AuthError } from "firebase/auth";
-    import { firebaseApp } from "../..";
+    import { firebaseApp } from "$lib/index";
     import MessageAlert from "../components/MessageAlert.svelte";
 
     onMount(() => {
@@ -50,6 +50,9 @@
                         break;
                     case "auth/missing-password":
                         ShowError("Missing Password!");
+                        break;
+                    case "auth/too-many-requests":
+                        ShowError("Too Many Requests!");
                         break;
                     default:
                         ShowError("Something went wrong...");

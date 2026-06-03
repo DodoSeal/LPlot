@@ -1,10 +1,10 @@
 <script lang="ts">
     import Copyright from "../components/Copyright.svelte";
     import ErrorAlert from "../components/ErrorAlert.svelte";
-    import OAuthProvider from "./OAuthProvider.svelte";
+    import OAuthProvider from "../components/OAuthProvider.svelte";
     import { mount, onMount } from "svelte";
     import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, type AuthError } from "firebase/auth";
-    import { firebaseApp } from "../..";
+    import { firebaseApp } from "$lib/index";
     import MessageAlert from "../components/MessageAlert.svelte";
 
     onMount(() => {
@@ -54,6 +54,9 @@
                         break;
                     case "auth/password-does-not-meet-requirements":
                         ShowError("Password doesn't fit requirements!");
+                        break;
+                    case "auth/too-many-requests":
+                        ShowError("Too Many Requests!");
                         break;
                     default:
                         ShowError("Something went wrong...");

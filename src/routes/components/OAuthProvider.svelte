@@ -1,9 +1,12 @@
 <script lang="ts">
+    import githubLogo from '$lib/assets/GitHub.png'
+    import discordLogo from '$lib/assets/Discord.png'
+
     const { providerName } = $props();
 </script>
 
 <button class="hover:bg-black group transition-all duration-200 flex items-center" title={providerName.toLowerCase()}>
-    <img class="group-hover:invert-100 w-6 mx-4" src="src/lib/assets/{providerName}.png" alt="{providerName.toLowerCase()}-logo">
+    <img class="group-hover:invert-100 w-6 mx-4" src={providerName === "Discord" ? discordLogo : githubLogo} alt="{providerName.toLowerCase()}-logo">
     <p class="group-hover:text-white transition-all duration-200">Continue with {providerName}</p>
 </button>
 
