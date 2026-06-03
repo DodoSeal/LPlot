@@ -60,7 +60,7 @@
         <OAuthProvider providerName="GitHub" />
     </div>
 
-    <Copyright />
+    <Copyright color="black" />
 </div>
 
 <style>
