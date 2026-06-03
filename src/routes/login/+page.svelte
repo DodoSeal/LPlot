@@ -1,5 +1,4 @@
 <script>
-  import Copyright from "../components/Copyright.svelte";
   import LoginForm from "./LoginForm.svelte";
   import LoginSidebar from "./LoginSidebar.svelte";
 
@@ -11,6 +10,4 @@
 <div class="w-screen h-screen flex">
     <LoginForm />
     <LoginSidebar />
-
-    <Copyright />
 </div>
