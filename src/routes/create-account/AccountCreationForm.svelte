@@ -15,9 +15,10 @@
 
             // TODO: Make account creation system!
 
-            if (emailInput.value === "" || passwordInput.value === "" || passwordVerifyInput.value === "") {
-                ShowError("Fill out all required fields!");
-            };
+            // if (emailInput.value === "" || passwordInput.value === "" || passwordVerifyInput.value === "") {
+            //     ShowError("Fill out all required fields!");
+            //     return;
+            // };
         });
     });
 
