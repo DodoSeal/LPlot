@@ -29,7 +29,7 @@
 
                 if (!isVerified) {
                     sendEmailVerification(user).then(() => {
-                        ShowMessage("A Verification Email has been sent!");
+                        ShowMessage("Verification Email Sent!");
                     }).catch((err) => {
                         ShowError("Something went wrong...");
                         console.error(err);

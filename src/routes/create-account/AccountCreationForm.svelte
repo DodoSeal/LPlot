@@ -3,35 +3,84 @@
     import ErrorAlert from "../components/ErrorAlert.svelte";
     import OAuthProvider from "./OAuthProvider.svelte";
     import { mount, onMount } from "svelte";
+    import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, type AuthError } from "firebase/auth";
+    import { firebaseApp } from "../..";
+    import MessageAlert from "../components/MessageAlert.svelte";
 
     onMount(() => {
+        // Firebase stuff
+        const auth = getAuth(firebaseApp);
+
         const createAccountButton = document.getElementById("create-account-button")! as HTMLInputElement;
         const emailInput = document.getElementById("email-input")! as HTMLInputElement;
         const passwordInput = document.getElementById("password-input")! as HTMLInputElement;
         const passwordVerifyInput = document.getElementById("password-verify-input")! as HTMLInputElement;
 
         createAccountButton.addEventListener("click", () =>{
-            RemoveExistingErrors();
+            RemoveExistingMessages();
 
-            // TODO: Make account creation system!
+            if (passwordInput.value !== passwordVerifyInput.value) {
+                ShowError("Passwords Must Match!");
+                return;
+            };
 
-            // if (emailInput.value === "" || passwordInput.value === "" || passwordVerifyInput.value === "") {
-            //     ShowError("Fill out all required fields!");
-            //     return;
-            // };
+            createUserWithEmailAndPassword(auth, emailInput.value, passwordInput.value,).then((userCredential) => {
+                const user = userCredential.user;
+                const isVerified = user.emailVerified;
+
+                if (!isVerified) {
+                    sendEmailVerification(user).then(() => {
+                        ShowMessage("Verification Email Sent!");
+                    }).catch((err) => {
+                        ShowError("Something went wrong...");
+                        console.error(err);
+                    });
+                    return;
+                };
+
+                window.location.href = "/dashboard";
+            }).catch((err: AuthError) => {
+                const errCode = err.code;
+
+                switch(errCode) {
+                    case "auth/email-already-in-use":
+                        ShowError("Email already in use!");
+                        break;
+                    case "auth/invalid-email":
+                        ShowError("Invalid Email!");
+                        break;
+                    case "auth/missing-password":
+                        ShowError("Missing Password!");
+                        break;
+                    case "auth/password-does-not-meet-requirements":
+                        ShowError("Password doesn't fit requirements!");
+                        break;
+                    default:
+                        ShowError("Something went wrong...");
+                        console.error(err);
+                        break;
+                };
+            });
         });
     });
 
-    function RemoveExistingErrors(): void {
-        const errorBox = document.querySelector("#error-box")!;
-        errorBox.innerHTML = "";
+    function RemoveExistingMessages(): void {
+        const messageBox = document.querySelector("#message-box")!;
+        messageBox.innerHTML = "";
     };
 
-    function ShowError(message: string): void {
-        RemoveExistingErrors();
+    function ShowError(err: string): void {
+        RemoveExistingMessages();
 
-        const errorBox = document.querySelector("#error-box")!;
-        mount(ErrorAlert, { target: errorBox, props: { message } });
+        const messageBox = document.querySelector("#message-box")!;
+        mount(ErrorAlert, { target: messageBox, props: { message: err } });
+    };
+
+    function ShowMessage(message: string) {
+        RemoveExistingMessages();
+
+        const messageBox = document.querySelector("#message-box")!;
+        mount(MessageAlert, { target: messageBox, props: { message } });
     };
 </script>
 
@@ -41,7 +90,7 @@
         <p class="text-3xl text-black font-bold">Account Creation</p>
     </div>
 
-    <div id="error-box"></div>
+    <div id="message-box"></div>
     
     <!-- Input Fields -->
     <div class="w-full h-100 flex flex-col items-center place-content-center">
