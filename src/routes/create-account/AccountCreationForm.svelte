@@ -58,6 +58,9 @@
                     case "auth/too-many-requests":
                         ShowError("Too Many Requests!");
                         break;
+                    case "auth/admin-restricted-operation":
+                        ShowError("Account Creation is Disabled");
+                        break;
                     default:
                         ShowError("Something went wrong...");
                         console.error(err);
